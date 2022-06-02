@@ -1,0 +1,19 @@
+{
+  "/openstreetmap": {
+    "target": "http://nominatim.openstreetmap.org/",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/openstreetmap": ""
+    }
+  },
+  "/django": {
+    "target": "http://127.0.0.1:8000/",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/django": ""
+    }
+  }
+
+}

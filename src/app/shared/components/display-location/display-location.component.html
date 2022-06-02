@@ -1,0 +1,14 @@
+<span *ngIf="location.street">{{location.street + (location.streetNumber ? ' ': ',')}}</span>
+<span *ngIf="location.streetNumber">{{location.streetNumber+','}}</span>
+<br [hidden]="!location.streetNumber && !location.street"/>
+
+<span *ngIf="location.postalCode">{{location.postalCode+' '}}</span>
+<span *ngIf="location.city">{{location.city+','}}</span>
+<br [hidden]="!location.postalCode && !location.city"/>
+
+<span *ngIf="location.state">{{location.state+ ', '}}</span>
+<span *ngIf="location.country">{{ location.country}}</span>
+
+<div *ngIf="!location.street && !location.streetNumber && !location.city && !location.country">
+  unknown
+</div>

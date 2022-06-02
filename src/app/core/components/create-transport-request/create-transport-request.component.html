@@ -1,0 +1,162 @@
+<div *ngIf="transport">
+<h1>{{'transportRequest.sendTransportRequest' | translate}}</h1>
+
+<mat-accordion multi="true">
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <h2>{{'transportRequest.transportOffer' | translate}}</h2>
+    </mat-expansion-panel-header>
+
+    <app-display-transport-offer-details [transport]="transport" [displayDriver]="true" *ngIf="transport"></app-display-transport-offer-details>
+
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="true">
+
+    <mat-expansion-panel-header>
+      <h2>{{'transportRequest.myOffer' | translate}}</h2>
+    </mat-expansion-panel-header>
+    <form #createTransportRequestForm="ngForm" (ngSubmit)="createTransportRequest(createTransportRequestForm.valid &&  priceAndSeatsForm.priceAndSeatsForm.valid && dateAndTimeForm.dateAndTimeForm.valid,
+                                  locationsCombo.startLocationIsSelected(),
+                                  locationsCombo.endLocationIsSelected(),
+                                  locationsCombo.manualStartInputFormChanged,
+                                  locationsCombo.manualEndInputFormChanged,
+                                  locationUnchanged.checked,
+                                  detailsUnchanged.checked,
+                                  locationsCombo
+                                  );  createTransportRequestForm.form.markAsTouched(); priceAndSeatsForm.priceAndSeatsForm.form.markAsTouched(); dateAndTimeForm.dateAndTimeForm.form.markAsTouched();">
+
+      <mat-expansion-panel [expanded]="true" hideToggle="true">
+        <mat-expansion-panel-header>
+          <h2>{{'transportRequest.offer' | translate}}</h2>
+        </mat-expansion-panel-header>
+
+        <mat-checkbox [(ngModel)]="keepTheSameLocations" #locationUnchanged name="locationsUnchanged">{{'transportRequest.keepTheSameLocations' | translate}}</mat-checkbox>
+        <br />
+
+        <mat-checkbox [(ngModel)]="keepTheSameDetails" #detailsUnchanged name="detailsUnchanged">{{'transportRequest.keepTheSameDetails' | translate}}</mat-checkbox>
+        <br />
+
+        <mat-checkbox [(ngModel)]="useCampaign" #useCampaignCheckbox name="useCampaign">{{'transportRequest.useCampaign' | translate}}</mat-checkbox>
+        <br />
+
+        <br />
+
+
+
+
+
+
+        <br />
+
+        <mat-form-field style="width: 65%;">
+          <mat-label>{{'transportRequest.additionalComments' | translate}}</mat-label>
+          <textarea matInput #comment [(ngModel)]="transportRequest.comment" name="comment" maxlength="250" rows="5" #commentControl="ngModel"></textarea>
+          <mat-hint align="end">{{comment.value.length}} / 250</mat-hint>
+        </mat-form-field>
+        <show-errors [control]="commentControl"></show-errors>
+
+      </mat-expansion-panel>
+
+
+
+
+      <mat-expansion-panel [expanded]="true" [hidden]="!useCampaignCheckbox.checked">
+        <mat-expansion-panel-header>
+          <h2>{{'transportRequest.campaign' | translate}}</h2>
+        </mat-expansion-panel-header>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div *ngIf="activeCampaigns && activeCampaigns.length > 0; else noActiveCampaigns">
+                <mat-form-field>
+                  <mat-label>{{'transportRequest.addUnderCampaign' | translate}}</mat-label>
+                  <mat-select [(value)]="transportRequest.insideCampaign" #campaignPicker>
+                    <mat-option *ngFor="let campaign of activeCampaigns" [value]="campaign.id">
+                      {{campaign.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <ng-template #noActiveCampaigns>
+                <div>
+                  {{'transportRequest.youDontHaveAnyCampaigns' | translate}}
+                  <br>
+                  <a type="button" class="btn btn-outline-success" (click)="createCampaignWithPopup()">{{'transportRequest.createCampaign' | translate}}</a>
+                </div>
+              </ng-template>
+
+
+
+
+
+
+
+            </div>
+            <div class="col">
+              <div class="text-right">
+                {{'transportRequest.whatAreCampaigns' | translate}} <button mat-icon-button mdbTooltip="{{'common.clickToFindOutMore' | translate}}" [routerLink]="'/help/campaigns'"><mat-icon>help_outline</mat-icon></button>
+              </div>
+
+              <div class="text-right">
+                {{'transportRequest.createNewCampaign' | translate}}
+                <br>
+                <a type="button" class="btn btn-outline-success" (click)="createCampaignWithPopup()">{{'transportRequest.createCampaign' | translate}}</a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+      </mat-expansion-panel>
+
+
+
+
+    <mat-expansion-panel [expanded]="true" [hidden]="detailsUnchanged.checked">
+      <mat-expansion-panel-header>
+        <h2>{{'transportRequest.details' | translate}}</h2>
+      </mat-expansion-panel-header>
+
+      <div class="container">
+
+
+        <div class="row pb-4">
+          <div class="col-sm">
+            <app-display-date-and-time-form [dateIsEnabled]="transport.negotiability.dateIsNegotiable" [timeIsEnabled]="transport.negotiability.timeIsNegotiable"
+                                            #dateAndTimeForm [title]="'Date and time'" [(date)]="transportRequest.date" [(time)]="transportRequest.time">
+            </app-display-date-and-time-form>
+          </div>
+          <div class="col-sm">
+            <app-display-price-and-seats-form [priceIsEnabled]="transport.negotiability.priceIsNegotiable" [numberOfSeatsIsEnabled]="transport.negotiability.numberOfSeatsAreNegotiable"
+                #priceAndSeatsForm [title]="'Pricing and seats'" [(price)]="transportRequest.price" [(numberOfSeats)]="transportRequest.numberOfSeats" [numberOfSeatsMax]="transport.stillAvailableSeats">
+            </app-display-price-and-seats-form>
+          </div>
+        </div>
+
+
+
+
+
+
+
+      </div>
+
+
+    </mat-expansion-panel>
+
+    <app-locations-often-used-map-manual-combo #locationsCombo [(startLocation)]="transportRequest.startLocation" [(endLocation)]="transportRequest.endLocation"
+                                               [(oftenUsedStartLocationId)]="transportRequest.startLocationId" [(oftenUsedEndLocationId)]="transportRequest.endLocationId"
+                                               [startLocationToPreload]="[transport.startLocation.lat, transport.startLocation.lan]" [endLocationToPreload]="[transport.endLocation.lat, transport.endLocation.lan]"
+                                               [hidden]="locationUnchanged.checked"
+                                               [startLocationPickerIsEnabled]="transport.negotiability.startLocationIsNegotiable" [endLocationPickerIsEnabled]="transport.negotiability.endLocationIsNegotiable"
+    ></app-locations-often-used-map-manual-combo>
+
+    <input mdbBtn color="secondary" mdbWavesEffect  type="submit" class="float-right" value="{{'transportRequest.sendTransportRequest' | translate}}">
+
+    </form>
+  </mat-expansion-panel>
+</mat-accordion>
+</div>

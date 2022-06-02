@@ -1,0 +1,44 @@
+<div class="shadow p-3 mb-5 bg-white rounded ml-5 mt-5 mr-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <form (ngSubmit)="login()">
+          <h1>{{'login.login'|translate}}</h1>
+          <br/>
+          <br/>
+
+          <mat-form-field>
+            <input matInput id="username" name="username" placeholder="{{'login.username'|translate}}" [(ngModel)]="user.username">
+          </mat-form-field>
+          <br/>
+          <mat-form-field>
+            <input matInput type="password" id="password" name="password" placeholder="{{'login.password'|translate}}" [(ngModel)]="user.password">
+          </mat-form-field>
+
+          <br/>
+          <br/>
+          <app-submit-btn [value]="'Login'"></app-submit-btn>
+
+
+
+          <br/>
+          <br/>
+          <br/>
+          <br />
+          <a [routerLink]="'/register'">{{'login.dontHaveAccount'|translate}}</a>
+
+        </form>
+      </div>
+      <div class="col-sm log-image">
+        <img src="../../../../assets/images/vintage-car.jpg"  alt="car image" style="padding-top: 100px; padding-left: 20px"/>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+
+
+

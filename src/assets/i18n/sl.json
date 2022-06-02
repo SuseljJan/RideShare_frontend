@@ -1,0 +1,222 @@
+{
+  "home": {
+    "whatIs": "Kaj je",
+    "appName": "Deli Prevoz",
+    "howToUse": "Kako uporabljati",
+    "whatsNew": "Kaj je novega",
+    "shareTransportationTheSmartWay": "Pametno deljenje prevozov"
+  },
+  "nav": {
+    "searchTransports": "Iskanje prevozov",
+    "createTransportOffer": "Ustvari prevoz",
+    "myTransports": "Moji prevozi",
+    "myCampaigns": "Moje kampanije",
+    "myLocations": "Moje lokacije",
+    "help": "Pomoč",
+    "logout": "Izpis",
+    "login": "Prijava",
+    "register": "Registracija"
+  },
+  "searchTransports": {
+    "driver": "Voznik",
+    "searchTransportOffers": "Iskanje prevozov",
+    "when": "Kdaj",
+    "location": "Lokacija",
+    "bookASeat": "Rezerviraj sedež",
+    "enterSearchQuery": "Vnesite iskalne parametre",
+    "noResults": "Iskanje ni vrnilo rezultatov"
+  },
+  "locationsCombo": {
+    "pickFromOftenUsed": "Izberi iz mojih lokacij",
+    "pickOnMap": "Izberi na zemljevidu",
+    "removeMarker": "Odstrani lokacijo",
+    "youCanEnterDestination": "Lokacijo lahko vnesete tu ali jo iznačite na zemljevidu",
+    "start": "START",
+    "end": "END",
+    "youDontHaveAnyLocations": "Nimate nobenih shranjenih lokacij. Ustvarite novo ",
+    "here": "tu",
+    "startIsNegotiable": "Začetna lokacija se lahko spremeni s strani sopotnikov",
+    "endIsNegotiable": "Končna lokacija se lahko spremeni s strani sopotnikov",
+    "negotiability": "Spreminjanje podatkov s strani sopotnikov",
+    "location": "Lokacija"
+  },
+
+ "createTransport": {
+   "createTransportOffer": "Ustvari prevoz",
+   "dateAndTime": "Datum in čas",
+   "pricingAndSeats": "Cena in sedeži",
+   "additionalComments": "Dodatni komentarji",
+   "createTransport": "Ustvari prevoz",
+   "yourOffer": "Tvoja ponudba"
+ },
+  "transportRequest": {
+    "sendTransportRequest": "Pošlji povpraševanje",
+    "transportOffer": "Ponudba prevoza",
+    "myOffer": "Moja ponudba",
+    "offer": "Ponudba",
+    "keepTheSameLocations": "Obdrži lokacije",
+    "keepTheSameDetails": "Obdrži podrobnosti",
+    "useCampaign": "Uporabi kampanijo",
+    "additionalComments": "Dodatni komentarji",
+    "campaign": "Kampanija",
+    "addUnderCampaign": "Dodaj pod kampanijo",
+    "youDontHaveAnyCampaigns": "Nimate nobene aktivne kampanije. Želite ustvariti novo?",
+    "createCampaign": "Ustvari kampanijo",
+    "whatAreCampaigns": "Kaj so kampanije?",
+    "createNewCampaign": "Ustvari novo kampanijo?",
+    "details": "Podrobnosti",
+    "dateAndTime": "Datum in čas",
+    "pricingAndSeats":  "Cena in sedeži"
+  },
+
+  "myTransports": {
+    "givenTransports": "Kot voznik",
+    "takenTransports": "Kot sopotnik",
+    "activeInSearch": "Aktivno v iskalniku",
+    "inactiveInSearch": "Ni aktivno v iskalniku",
+    "canceled": "Preklicano",
+    "requests": "Povpraševanja",
+    "cancel": "Prekliči",
+    "noGivenTransports": "Nimaš nobenega prevoza, ki si se ga udeležil kot voznik. Ustvari svoj prvi prevoz ",
+    "here": "tu",
+    "pendingDriverApproval": "Čaka na potrditev voznika",
+    "accepted": "Sprejet",
+    "noTakenTransports": "Nimaš nobenega prevoza, ki bi se ga udeležil kot sopotnik. Rezerviraj si sedež na svojem prvem prevozu "
+  },
+  "myLocations": {
+    "existingLocations": "Obstoječe lokacije",
+    "name": "Ime",
+    "location": "Lokacija",
+    "remove": "Odstrani",
+    "createLocation": "Ustvari lokacijo",
+    "nameIdentifier": "Ime",
+    "details": "Podrobnosti",
+    "map": "Zemljevid",
+    "youCanEnterDestinationsInThisPanel": "Podrobnosti lokacije lahko vneseš sem ali izbereš lokacijo na zemljevidu"
+  },
+
+  "myCampaigns": {
+    "existingCampaigns": "Obstoječe kampanije",
+    "name": "ime",
+    "closed": "Zaprta",
+    "allRequests": "Vsa povpraševanja",
+    "createCampaign": "Ustvari kampanijo",
+    "whatAreCampaigns": "Kaj so kampanije"
+  },
+
+  "common": {
+    "negotiable": "Sopotniku dovoljeno spreminjanje",
+        "clickToFindOutMore": "Klikni za več podrobnosti",
+    "reviewDriver": "Oceni prevoznika",
+    "price": "Cena",
+    "numberOfSeats": "Število sedežev",
+    "search": "Iskanje",
+    "date": "Datum",
+    "fullDay": "Cel dan",
+    "fromTime": "Od (časovno)",
+    "toTime": "Do (časovno)",
+    "start": "Začetna lokacija",
+    "end": "Končna lokacija",
+    "clear": "počisti",
+    "removeStart": "Odstrani zač. lokacijo",
+    "removeEnd": "Odstrani kon. lokacijo",
+    "results": "Rezultati",
+    "time": "Čas",
+    "requestedPrice": "Pričakovana cena",
+    "availableSeats": "Prosti sedeži",
+    "ratings": "Ocena/e",
+    "comment": "Komentar",
+    "additionalComments": "Dodatni komentarji",
+    "driver": "Prevoznik"
+  },
+
+  "notifications": {
+    "notifications": "Obvestila",
+    "dismissAll": "Označi vse kot prebrano",
+    "viewAll": "Vsa sporočila",
+    "noNew": "Ni novih obvestil"
+  },
+  "alertMessages": {
+    "messages": "Sporočila",
+    "unread": "Neprebrana",
+    "Read": "Prebrana"
+  },
+  "myProfile": {
+    "myProfile": "Moj profil",
+    "profileDetails": "Podrobnosti profila",
+    "username": "Uporabniško ime",
+    "email": "Email",
+    "myReviews": "Moje ocene",
+    "youDont":"You don't have any reviews yet."
+  },
+  "reviews": {
+    "rating": "Ocena",
+    "reviewer": "Ocenjevalec",
+    "comment": "Komentar",
+    "user": "Uporabnik",
+    "averageRating": "Povprečna ocena",
+    "numberOfReviews": "Število ocen",
+    "reviews": "Ocene",
+    "latestReviews": "Zadnje ocene",
+    "userDoesntHaveReviews": "Uporabnik nima ocen.",
+    "createReview": "Ustvarite oceno",
+    "writeYourComment": "Vpišite dodatni komentar...",
+    "youMustBeLoggedIn": "Za ocenjevanje morate biti prijavljeni."
+  },
+  "campaigns": {
+    "closed": "Zaprta",
+    "campaigns": "Kampanije",
+    "existingCampaigns": "Obstoječe kampanije",
+    "createCampaign": "Ustvari kampanijo",
+    "true": "DA",
+    "false": "NE",
+    "allRequests": "Vsa povpraševanja",
+    "name": "Ime",
+    "whatAreCampaigns": "Kaj so kampanije?",
+      "youDontHaveAnyCampaigns": "Trenutno nimaš še novene kampanijo? Ustvari prvo kampanijo?"
+  },
+  "locations": {
+    "myLocations": "Moje lokacije",
+    "existingLocations": "Obstoječe lokacije",
+    "name": "Ime",
+    "location": "Lokacija",
+    "noLocations": "Nimaš še nobene pogosto uporabljene lokacije. Dodaj prvo?",
+    "createLocation": "Ustvari lokacijo",
+    "details": "Podrobnosti",
+    "map": "Zemljevid",
+    "remove": "Odstrani"
+  },
+  "offerDetails": {
+    "start": "Zač. lokacija",
+    "end": "Kon. lokacija",
+    "seatsAvailable": "Prosti sedeži",
+    "driverReviews": "Ocena prevoznika"
+  },
+  "myTransportRequests": {
+    "transportRequests": "Povpraševanja",
+    "offer": "Ponudba",
+    "availableRequests": "Aktivna povpraševanja",
+    "noAvailableRequests": "Ni aktivnih povpraševanj",
+    "acceptedRequests": "Sprejeta povpraševanja",
+    "noAcceptedRequests": "Ni sprejetih povpraševanj",
+    "acceptOffer": "Sprejmi povpraševanje"
+
+  },
+
+
+  "login": {
+    "login": "Prijava",
+    "username": "Uporabniško ime",
+    "password": "Geslo",
+    "dontHaveAccount" : "Še nimate uporabniškega računa?"
+  },
+  "register": {
+    "registration": "Registracija",
+    "username": "Uporabniško ime",
+    "password": "Geslo",
+    "email": "Email",
+    "repeatPassword": "Ponovite geslo",
+    "register": "Registracija",
+    "allreadyHaveAccount": "Že imate uporabniški račun?"
+  }
+}

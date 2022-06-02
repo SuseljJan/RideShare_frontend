@@ -1,0 +1,13 @@
+.not-accepted-by-driver-background {
+  background-color: #E7A6D7;
+}
+.accepted-by-driver-background {
+  background-color: #8E5781;
+}
+
+.not-accepted-by-driver-border {
+  border-bottom: 2px solid #E7A6D7;
+}
+.accepted-by-driver-border {
+  border-bottom: 2px solid #8E5781;
+}

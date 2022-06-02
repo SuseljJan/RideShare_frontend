@@ -1,0 +1,83 @@
+<h1>Requests of campaign</h1>
+<div *ngIf="campaign">
+  Campaign name: {{campaign.name}}
+  <br />
+  Campaign is {{campaign.transportWasFound ? 'closed': 'opened'}}
+</div>
+<br />
+
+<mat-accordion multi="true">
+
+  <mat-expansion-panel [expanded]="requestsOfCampaignExpanded">
+    <mat-expansion-panel-header>
+      <h2>Requests of campaign ({{requestsOfCampaign?.count || 0}})</h2>
+      ({{requestsOfCampaign?.count}})
+    </mat-expansion-panel-header>
+
+    <div *ngIf="requestsOfCampaign?.results.length > 0">
+      <app-responsive-table-with-collapsed-rows-two-side>
+        <table>
+          <thead>
+          <tr>
+            <th scope="col">Start location</th>
+            <th scope="col">End location</th>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">My price</th>
+            <th scope="col">Number of seats</th>
+            <th scope="col">Comment</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let request of requestsOfCampaign.results" [class.accepted-by-driver-border]="request.acceptedByDriver" [class.not-accepted-by-driver-border]="!request.acceptedByDriver">
+            <td data-label="Start location">
+              <app-display-location [location]="request.startLocation"></app-display-location>
+            </td>
+            <td data-label="End location">
+              <app-display-location [location]="request.endLocation"></app-display-location>
+            </td>
+            <td data-label="Date">{{request.date}}</td>
+            <td data-label="Time">{{request.time}}</td>
+            <td data-label="My price">{{request.price}}</td>
+            <td data-label="Number of seats">{{request.numberOfSeats}}</td>
+            <td data-label="Comment">
+              <mat-icon *ngIf="request.comment; else noCommentTemplate" matTooltip="{{request.comment}}">done</mat-icon>
+              <ng-template #noCommentTemplate><mat-icon>highlight_off</mat-icon></ng-template>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </app-responsive-table-with-collapsed-rows-two-side>
+
+      <div class="container-fluid pt-1">
+        <div class="row">
+          <div class="col">
+            <app-color-legend>
+              <li><span class="accepted-by-driver-background"></span>Accepted by driver</li>
+              <li><span class="not-accepted-by-driver-background"></span>Not accepted by driver</li>
+            </app-color-legend>
+          </div>
+        </div>
+        <div class="row float-right">
+          <div class="col">
+            <mat-paginator [length]="requestsOfCampaign.count"
+                           [pageSize]="5"
+                           [hidePageSize]="true"
+                           [pageIndex]="requestsOfCampaign.currentPage-1"
+                           (page)="changePage($event.pageIndex +1)">
+            </mat-paginator>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+
+    <div *ngIf="requestsOfCampaign?.results.length === 0">
+      No taken transports yet. Book a your first transport <a [routerLink]="'/search'" >here</a>.
+    </div>
+
+
+  </mat-expansion-panel>
+</mat-accordion>

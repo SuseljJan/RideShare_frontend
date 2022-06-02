@@ -1,0 +1,3 @@
+:host /deep/ .legend { list-style: none; }
+:host /deep/ .legend li { float: left; margin-right: 10px; }
+:host /deep/ .legend span { border: 1px solid #ccc; float: left; width: 12px; height: 12px; margin: 2px; }

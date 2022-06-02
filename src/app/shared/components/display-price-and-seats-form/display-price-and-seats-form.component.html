@@ -1,0 +1,39 @@
+<form #priceAndSeatsForm="ngForm">
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <label for="price">{{title}}</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <mat-form-field [floatLabel]="floatLabel">
+          <input matInput type="number" id="price" name="price" placeholder="{{'common.price'|translate}}" [disabled]="!priceIsEnabled" #priceControl="ngModel" [(ngModel)]="price" required>
+        </mat-form-field>
+        <mat-checkbox class="pl-4" [(ngModel)]="priceIsNegotiable" name="priceIsNegotiable" *ngIf="displayNegotiability">{{'common.negotiable' | translate}}</mat-checkbox>
+        <show-errors [control]="priceControl"></show-errors>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm">
+        <mat-form-field [floatLabel]="floatLabel">
+          <input  matInput type="number" id="numberOfSeats" name="numberOfSeats"
+                  [disabled]="!numberOfSeatsIsEnabled" [(ngModel)]="numberOfSeats" [min]="1"  [max]="numberOfSeatsMax"
+                  placeholder="{{'common.numberOfSeats'|translate}}" #numberOfSeatsControl="ngModel" required>
+        </mat-form-field>
+        <mat-checkbox class="pl-4" [(ngModel)]="numberOfSeatsIsNegotiable" name="numberOfSeatsIsNegotiable" *ngIf="displayNegotiability">{{'common.negotiable' | translate}}</mat-checkbox>
+        <show-errors [control]="numberOfSeatsControl"></show-errors>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</form>
+
+
+

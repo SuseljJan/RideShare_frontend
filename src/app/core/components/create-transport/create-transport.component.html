@@ -1,0 +1,83 @@
+<h1>{{'createTransport.createTransportOffer' | translate}}</h1>
+
+<form #createTransportForm="ngForm" (ngSubmit)="createTransport(createTransportForm.valid &&  priceAndSeatsForm.priceAndSeatsForm.valid && dateAndTimeForm.dateAndTimeForm.valid,
+                                  locationsCombo.startLocationIsSelected(),
+                                  locationsCombo.endLocationIsSelected(),
+                                  locationsCombo.manualStartInputFormChanged,
+                                  locationsCombo.manualEndInputFormChanged,
+                                  locationsCombo
+                                  );  createTransportForm.form.markAsTouched(); priceAndSeatsForm.priceAndSeatsForm.form.markAsTouched(); dateAndTimeForm.dateAndTimeForm.form.markAsTouched();">
+
+<mat-accordion multi="true">
+
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <h2>{{'createTransport.yourOffer' | translate}}</h2>
+    </mat-expansion-panel-header>
+
+
+      <div class="container">
+
+
+        <div class="row pb-4 text-center">
+          <div class="col-xl">
+            <app-display-date-and-time-form #dateAndTimeForm [title]="translate.transform('createTransport.dateAndTime')" [(date)]="transport.date" [(time)]="transport.time"
+                                            [displayNegotiability]="true"
+                                            [(dateIsNegotiable)]="transport.negotiability.dateIsNegotiable" [(timeIsNegotiable)]="transport.negotiability.timeIsNegotiable"
+            ></app-display-date-and-time-form>
+          </div>
+          <div class="col-xl">
+            <app-display-price-and-seats-form #priceAndSeatsForm [title]="'Pricing and seats'" [(price)]="transport.price" [(numberOfSeats)]="transport.numberOfSeats"
+                                              [displayNegotiability]="true"
+                                            [(priceIsNegotiable)]="transport.negotiability.priceIsNegotiable" [(numberOfSeatsIsNegotiable)]="transport.negotiability.numberOfSeatsAreNegotiable"
+            ></app-display-price-and-seats-form>
+          </div>
+        </div>
+
+        <div class="row pb-4 text-center">
+          <div class="col-sm">
+
+            <div class="container">
+              <div class="row">
+                <div class="col-sm">
+                  <mat-form-field style="width: 65%;">
+                    <mat-label>{{'createTransport.additionalComments' | translate}}</mat-label>
+                    <textarea matInput #comment [(ngModel)]="transport.comment" name="comment" maxlength="250" rows="5" #commentControl="ngModel"></textarea>
+                    <mat-hint align="end">{{comment.value.length}} / 250</mat-hint>
+                  </mat-form-field>
+                  <show-errors [control]="commentControl"></show-errors>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+
+
+
+      </div>
+
+
+
+  </mat-expansion-panel>
+
+
+  <app-locations-often-used-map-manual-combo #locationsCombo [(endLocation)]="transport.endLocation" [(startLocation)]="transport.startLocation"
+                                             [(oftenUsedEndLocationId)]="transport.endLocationId" [(oftenUsedStartLocationId)]="transport.startLocationId"
+                                             [displayNegotiability]="true" [enableAllControls]="true"
+                                             [(startLocationIsNegotiable)]="transport.negotiability.startLocationIsNegotiable"
+                                             [(endLocationIsNegotiable)]="transport.negotiability.endLocationIsNegotiable">
+
+  </app-locations-often-used-map-manual-combo>
+
+
+
+</mat-accordion>
+
+
+  <input mdbBtn color="secondary" mdbWavesEffect  type="submit" class="float-right" value="{{'createTransport.createTransport' | translate}}">
+
+</form>
+

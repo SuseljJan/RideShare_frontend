@@ -1,0 +1,25 @@
+.map {
+  height: 500px;
+  padding: 0;
+}
+
+
+/deep/ .mat-slide-toggle:not(.mat-checked) .mat-slide-toggle-bar {
+  background-color: #5cb85c;
+}
+
+/deep/ .mat-slide-toggle:not(.mat-checked) .mat-slide-toggle-thumb {
+  background-color: #5cb85c;
+}
+
+/deep/ .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+  background-color: #d9534f;
+}
+
+/deep/ .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: #d9534f;
+}
+
+.disabled-text{
+  color:darkgrey;
+}

@@ -1,0 +1,59 @@
+<h1>{{'myProfile.myProfile'|translate}}</h1>
+
+<mat-accordion multi="true">
+
+  <mat-expansion-panel [expanded]="profileDetailsExpand">
+    <mat-expansion-panel-header>
+      <h2>{{'myProfile.profileDetails'|translate}}</h2>
+    </mat-expansion-panel-header>
+    <div *ngIf="me">
+      <b>{{'myProfile.username'|translate}}:</b>
+      {{me.username}}
+      <br />
+
+      <b>{{'myProfile.email'|translate}}:</b>
+      {{me.email}}
+    </div>
+  </mat-expansion-panel>
+
+
+  <mat-expansion-panel [expanded]="myReviewsExpand">
+    <mat-expansion-panel-header>
+      <h2>{{'myProfile.myReviews'|translate}} ({{reviews?.count}})</h2>
+    </mat-expansion-panel-header>
+
+    <div *ngIf="reviews?.results.length > 0">
+      <app-responsive-table-with-collapsed-rows-left>
+        <table>
+          <thead>
+          <tr>
+            <th scope="col">{{'reviews.rating'|translate}}</th>
+            <th scope="col">{{'reviews.reviewer'|translate}}</th>
+            <th scope="col">{{'reviews.comment'|translate}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let review of reviews.results">
+            <td [attr.data-label]="ts.instant('reviews.rating')"><star-rating [value]="review.numberOfStars" totalstars="5" checkedcolor="gold" uncheckedcolor="black" size="24px" readonly="true"></star-rating></td>
+            <td [attr.data-label]="ts.instant('reviews.reviewer')"><a [routerLink]="'/reviews/'+review.reviewer.id">{{review.reviewer.username}}</a></td>
+            <td [attr.data-label]="ts.instant('common.comment')">{{review.comment}}</td>
+
+          </tr>
+          </tbody>
+        </table>
+      </app-responsive-table-with-collapsed-rows-left>
+
+      <mat-paginator [length]="reviews.count"
+                     [pageSize]="reviews.currentPage"
+                     [hidePageSize]="true">
+      </mat-paginator>
+
+    </div>
+
+    <div *ngIf="reviews?.results.length === 0">
+      {{'myProfile.youDont'|translate}}
+    </div>
+
+  </mat-expansion-panel>
+
+</mat-accordion>

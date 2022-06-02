@@ -1,0 +1,102 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item style="text-transform: uppercase;" [routerLink]="'/transports/search'"><img src="../../../../assets/icons/search.png" class="menu-icon">{{'nav.searchTransports' | translate}}</a>
+      <a mat-list-item style="text-transform: uppercase;" [routerLink]="'/transports/create'" *authOnly><img src="../../../../assets/icons/add.png" class="menu-icon">{{'nav.createTransportOffer' | translate}}</a>
+
+      <a mat-list-item style="text-transform: uppercase;" [routerLink]="'/login'" *nonAuthOnly><img src="../../../../assets/icons/login.png" class="menu-icon">{{'nav.login' | translate}}</a>
+      <a mat-list-item style="text-transform: uppercase;" [routerLink]="'/register'" *nonAuthOnly><img src="../../../../assets/icons/createAccount.png" class="menu-icon" >{{'nav.register' | translate}}</a>
+
+      <div class="middle-links">
+        <a mat-list-item style="text-transform: uppercase;" [routerLink]="'/me/transports'" *authOnly><img src="../../../../assets/icons/transport.png" class="menu-icon">{{'nav.myTransports' | translate}}</a>
+        <a mat-list-item style="text-transform: uppercase;" [routerLink]="'/me/campaigns'" *authOnly><img src="../../../../assets/icons/campaigns.png" class="menu-icon">{{'nav.myCampaigns' | translate}}</a>
+        <a mat-list-item style="text-transform: uppercase;" [routerLink]="'/me/locations'" *authOnly><img src="../../../../assets/icons/location.png" class="menu-icon">{{'nav.myLocations' | translate}}</a>
+      </div>
+      <div class="bottom-links">
+        <a mat-list-item [routerLink]="'/help'" style="text-transform: uppercase;"><img src="../../../../assets/icons/help.png" class="menu-icon" >{{'nav.help' | translate}}</a>
+        <a mat-list-item (click)="logout()" [routerLink]="'/'" *authOnly style="text-transform: uppercase;"><img src="../../../../assets/icons/logout.png" class="menu-icon" >{{'nav.logout' | translate}}</a>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="content-without-navbar">
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+      *ngIf="isHandset$ | async">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+
+
+      <span>{{'home.appName' | translate}}</span>
+
+
+
+
+
+<!--                            <div class="btn-group" style="padding-right: 30px">-->
+<!--      <a style="outline: none !important; border: 0 !important; color: white !important;" id="username-button"  class="dropdown-toggle very-important" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="userMenuVisible = !userMenuVisible">-->
+<!--              {{username}}-->
+<!--        </a>-->
+<!--                              <div class="dropdown-menu" [class.dropdown-menu-visible]="userMenuVisible" >-->
+<!--                                <a class="dropdown-item" [routerLink]="'/me/profile'" (click)="userMenuVisible = false">My profile</a>-->
+<!--                                <div class="dropdown-divider"></div>-->
+<!--                                <a class="dropdown-item" (click)="logout()" [routerLink]="'/'" *authOnly (click)="userMenuVisible = false">Logout</a>-->
+<!--                              </div>-->
+<!--                            </div>-->
+
+
+      <span style="flex: 1 1 auto"></span>
+      <a [routerLink]="'/me/profile'" style="padding-right: 30px; color:white; text-decoration: none;">{{username}}</a>
+
+      <mat-icon [matBadge]="numberOfNotifications" [matBadgeHidden]="notificationCounterHidden"  matBadgeColor="warn" style="cursor: pointer; padding-right: 50px" #warningIcon (click)="showNotifications()">notifications</mat-icon>
+
+<!--      <div>-->
+
+<!--        <table style="width: 300px; height: 65px;" *authOnly>-->
+<!--          <tr>-->
+<!--            <td style="width: 200px" align="center" valign="middle">-->
+<!--                      <div class="btn-group">-->
+<!--                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="userMenuVisible = !userMenuVisible" style="margin-right: 30px; border-radius: 12px; background-color: #e0d2f7">-->
+<!--                          {{username}}-->
+<!--                        </button>-->
+<!--                        <div class="dropdown-menu" [class.dropdown-menu-visible]="userMenuVisible">-->
+<!--                          <a class="dropdown-item" [routerLink]="'/me/profile'" (click)="userMenuVisible = false">My profile</a>-->
+<!--                          <div class="dropdown-divider"></div>-->
+<!--                          <a class="dropdown-item" (click)="logout()" [routerLink]="'/'" *authOnly (click)="userMenuVisible = false">Logout</a>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--            </td>-->
+<!--            <td style=" width: 100px" align="center" valign="middle">-->
+<!--                  <mat-icon [matBadge]="numberOfNotifications" [matBadgeHidden]="notificationCounterHidden"  matBadgeColor="warn" style="cursor: pointer; font-size: 35px; width: 35px;" #warningIcon (click)="showNotifications()">notifications</mat-icon>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--        </table>-->
+
+<!--      </div>-->
+
+    </mat-toolbar>
+
+    <app-notifications-dropdown #notificationsDropdown [notifications]="latestNotifications" [notificationsCount]="numberOfNotifications" (dismissAllEvent)="onDismissAll()"></app-notifications-dropdown>
+
+    <div class="main-content pr-2 pl-2 pb-5">
+
+
+
+
+      <ng-content></ng-content>
+
+    </div>
+
+
+<!--      <app-footer></app-footer>-->
+
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

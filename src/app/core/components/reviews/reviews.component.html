@@ -1,0 +1,119 @@
+<h1>{{'reviews.reviews' |translate}}</h1>
+
+  <mat-accordion multi="true">
+    <div *ngIf="userWithAvgRatings">
+      <mat-expansion-panel [expanded]="true" [hideToggle]="true" disabled="true">
+        <mat-expansion-panel-header>
+          <h2 style="color: black;">{{'reviews.user' |translate}}</h2>
+        </mat-expansion-panel-header>
+
+        <div>{{'reviews.user' |translate}}: <b>{{userWithAvgRatings.username}}</b></div>
+        <div>{{'reviews.averageRating' |translate}}: <b>{{userWithAvgRatings.avgRating ? userWithAvgRatings.avgRating.toFixed(2): '/'}}</b></div>
+        <div>{{'reviews.numberOfReviews' |translate}}: <b>{{userWithAvgRatings.numberOfRatings}}</b></div>
+
+      </mat-expansion-panel>
+    </div>
+
+    <div *ngIf="paginatedReview">
+      <mat-expansion-panel [(expanded)]="latestReviewsExpanded">
+      <mat-expansion-panel-header>
+        <h2>{{'reviews.latestReviews' |translate}}</h2>
+      </mat-expansion-panel-header>
+      <div *ngIf="paginatedReview.results.length > 0">
+        <app-responsive-table-with-collapsed-rows-left >
+          <table *ngIf="paginatedReview.results.length > 0">
+            <col class="first" width="30%">
+            <col class="notFirst" width="60%">
+            <col class="notFirst" width="30%">
+            <thead>
+            <tr>
+              <th>{{'reviews.rating' |translate}}</th>
+              <th>{{'reviews.comment' |translate}}</th>
+              <th>{{'reviews.reviewer' |translate}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let review of paginatedReview.results">
+              <td [attr.data-label]="ts.instant('reviews.rating')"><star-rating [value]="review.numberOfStars" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="24px" readonly="true"></star-rating></td>
+              <td [attr.data-label]="ts.instant('common.comment')">{{review.comment}}</td>
+              <td [attr.data-label]="ts.instant('common.reviewer')">{{review.reviewer.username}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </app-responsive-table-with-collapsed-rows-left>
+
+        <div class="container">
+          <div class="row">
+            <div class="col float-right">
+              <mat-paginator [length]="paginatedReview.count"
+                             [pageSize]="5"
+                             [pageIndex]="paginatedReview.currentPage -1"
+                             [hidePageSize]="true"
+                             (page)="changeLatestReviewsPage($event.pageIndex +1)">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+    <!--todo pagination-->
+        <div *ngIf="paginatedReview.results.length === 0">
+          <p>{{'reviews.userDoesntHaveReviews' |translate}}</p>
+        </div>
+
+      </mat-expansion-panel>
+    </div>
+
+    <mat-expansion-panel [(expanded)]="createReviewExpanded">
+      <mat-expansion-panel-header>
+        <h2>{{'reviews.createReview' |translate}}</h2>
+      </mat-expansion-panel-header>
+
+      <div *ngIf="auth.isAuthenticated(); else unauthenticated">
+
+        <form (ngSubmit)="postAReview()">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <star-rating [value]="reviewToPost.numberOfStars" totalstars="5" checkedcolor="red"
+                             uncheckedcolor="black" size="24px" readonly="false" (rate)="reviewToPost.numberOfStars = $event.newValue"></star-rating>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field style="width: 65%;">
+                  <mat-label>{{'reviews.writeYourComment' |translate}}</mat-label>
+                  <textarea matInput #comment [(ngModel)]="reviewToPost.comment" name="comment" maxlength="250" rows="5" #commentControl="ngModel"></textarea>
+                  <mat-hint align="end">{{comment.value.length}} / 250</mat-hint>
+                </mat-form-field>
+                <show-errors [control]="commentControl"></show-errors>
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+          <input mdbBtn color="secondary" mdbWavesEffect type="submit" value="{{'reviews.createReview' |translate}}">
+        </form>
+      </div>
+
+
+
+      <ng-template #unauthenticated>
+        <div>
+          {{'reviews.youMustBeLoggedIn' |translate}}
+        </div>
+      </ng-template>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+

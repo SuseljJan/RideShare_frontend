@@ -1,0 +1,27 @@
+<form #locationsForm="ngForm">
+<label for="street">{{title}}</label>
+<br/>
+
+<mat-form-field class="long-input" [floatLabel]="floatLabel">
+  <input matInput id="street" name="street" placeholder="Street" [(ngModel)]="location.street"  #streetControl="ngModel" [disabled]="!enteringLocationsIsEnabled">
+</mat-form-field>
+<mat-form-field class="short-input-with-left-padding" [floatLabel]="floatLabel">
+  <input matInput placeholder="Street number" id="streetNumber" name="streetNumber" [(ngModel)]="location.streetNumber"  #streetNumberControl="ngModel" [disabled]="!enteringLocationsIsEnabled">
+</mat-form-field>
+
+<mat-form-field class="long-input" [floatLabel]="floatLabel">
+  <input matInput id="city" name="city" placeholder="City" [(ngModel)]="location.city"  #cityControl="ngModel" [disabled]="!enteringLocationsIsEnabled">
+</mat-form-field>
+<mat-form-field class="short-input-with-left-padding" [floatLabel]="floatLabel">
+  <input matInput id="postalCode" name="postalCode" placeholder="Postal code" [(ngModel)]="location.postalCode"  #postalCodeControl="ngModel" [disabled]="!enteringLocationsIsEnabled">
+</mat-form-field>
+
+<mat-form-field class="medium-input" [floatLabel]="floatLabel">
+  <input matInput id="state" name="state" placeholder="State" [(ngModel)]="location.state" #stateControl="ngModel" [disabled]="!enteringLocationsIsEnabled">
+</mat-form-field>
+<mat-form-field class="medium-input-with-left-padding" [floatLabel]="floatLabel">
+  <input matInput id="country" name="country" placeholder="Country" [(ngModel)]="location.country"  #countryControl="ngModel" [disabled]="!enteringLocationsIsEnabled">
+</mat-form-field>
+
+</form>
+

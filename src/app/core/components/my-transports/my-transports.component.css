@@ -1,0 +1,36 @@
+.accepted-transport-request-background {
+  background-color: #D0A2E7;
+}
+.pending-transport-request-background {
+  background-color: #5C1182;
+}
+
+.pending-transport-request-border {
+  border-bottom: 2px solid #5C1182;
+}
+
+.accepted-transport-request-border {
+  border-bottom: 2px solid #D0A2E7;
+}
+
+
+
+.canceled-transport-background {
+  background-color: #000000;
+}
+.inactive-transport-background {
+  background-color: #E7A6D7;
+}
+.active-transport-background {
+  background-color: #8E5781;
+}
+
+.canceled-transport-border {
+  border-bottom: 2px solid #000000;
+}
+.inactive-transport-border {
+  border-bottom: 2px solid #E7A6D7;
+}
+.active-transport-border {
+ border-bottom: 2px solid #8E5781;
+}

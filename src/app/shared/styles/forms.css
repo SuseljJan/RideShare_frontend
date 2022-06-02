@@ -1,0 +1,15 @@
+.long-input{
+  width: 65%;
+}
+.short-input-with-left-padding{
+  width:33%;
+  padding-left: 2%;
+}
+.medium-input{
+  width: 49%;
+}
+
+.medium-input-with-left-padding{
+  width:49%;
+  padding-left: 2%;
+}

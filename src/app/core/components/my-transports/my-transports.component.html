@@ -1,0 +1,147 @@
+<h1>My transports</h1>
+
+<mat-accordion multi="true">
+
+  <mat-expansion-panel [expanded]="givenTransportsExpand">
+    <mat-expansion-panel-header>
+      Given transports
+      ({{givenTransports?.count}})
+    </mat-expansion-panel-header>
+
+    <div *ngIf="givenTransports?.results?.length > 0">
+      <app-responsive-table-with-collapsed-rows-two-side>
+      <table>
+        <thead>
+        <tr>
+          <th scope="col">{{'common.start' |translate}}</th>
+          <th scope="col">{{'common.end' |translate}}</th>
+          <th scope="col">{{'common.date' |translate}}</th>
+          <th scope="col">{{'common.time' |translate}}</th>
+          <th scope="col">{{'common.requestedPrice' |translate}}</th>
+          <th scope="col">{{'common.numberOfSeats' |translate}}</th>
+          <th scope="col">{{'common.comment' |translate}}</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr *ngFor="let transport of givenTransports.results" [class.active-transport-border]="transport.active" [class.inactive-transport-border]="!transport.active && !transport.canceled" [class.canceled-transport-border]="transport.canceled">
+          <td data-label="Start location">
+            <app-display-location [location]="transport.startLocation"></app-display-location>
+          </td>
+          <td data-label="End location">
+           <app-display-location [location]="transport.endLocation"></app-display-location>
+          </td>
+          <td [attr.data-label]="ts.instant('common.date')">{{transport.date}}</td>
+          <td [attr.data-label]="ts.instant('common.time')">{{transport.time}}</td>
+          <td [attr.data-label]="ts.instant('common.requestedPrice')">{{transport.price}}</td>
+          <td [attr.data-label]="ts.instant('common.numberOfSeats')">{{transport.numberOfSeats}}</td>
+          <td [attr.data-label]="ts.instant('common.comment')">
+            <div *ngIf="transport.comment; else noCommentTemplate">{{transport.comment}}</div>
+            <ng-template #noCommentTemplate><mat-icon>highlight_off</mat-icon></ng-template>
+          </td>
+          <th>
+            <button mdbBtn type="button" color="secondary" outline="true" mdbWavesEffect [routerLink]="'/me/transport/'+transport.id+'/requests'">{{'myTransports.requests' |translate}}</button>
+            <button mdbBtn type="button" color="elegant" outline="true" mdbWavesEffect (click)="cancelTransport(transport.id)" *ngIf="!transport.canceled">{{'myTransports.cancel' |translate}}</button>
+          </th>
+        </tr>
+        </tbody>
+      </table>
+      </app-responsive-table-with-collapsed-rows-two-side>
+
+      <div class="container-fluid pt-1">
+        <div class="row">
+          <app-color-legend>
+            <li><span class="active-transport-background"></span>{{'myTransports.activeInSearch' |translate}}</li>
+            <li><span class="inactive-transport-background"></span>{{'myTransports.inactiveInSearch' |translate}}</li>
+            <li><span class="canceled-transport-background"></span>{{'myTransports.canceled' |translate}}</li>
+          </app-color-legend>
+        </div>
+
+        <div class="row float-right">
+          <mat-paginator [length]="givenTransports.count"
+                         [pageSize]="5"
+                         [pageIndex]="givenTransports.currentPage -1"
+                         [hidePageSize]="true"
+                         (page)=" changeGivenTransportPage($event.pageIndex +1)">
+         </mat-paginator>
+        </div>
+      </div>
+
+    </div>
+    <div *ngIf="givenTransports?.results.length === 0">
+      {{'myTransports.noGivenTransports' |translate}}<a [routerLink]="'/transports/create'" >{{'myTransports.here' |translate}}</a>.
+    </div>
+
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="takenTransportsExpand">
+    <mat-expansion-panel-header>
+      {{'myTransports.takenTransports' |translate}}
+      ({{takenTransports?.count}})
+    </mat-expansion-panel-header>
+
+    <div *ngIf="takenTransports?.results.length > 0">
+      <app-responsive-table-with-collapsed-rows-two-side>
+      <table>
+        <thead>
+        <tr>
+          <th scope="col">{{'common.start' |translate}}</th>
+          <th scope="col">{{'common.end' |translate}}</th>
+          <th scope="col">{{'common.date' |translate}}</th>
+          <th scope="col">{{'common.time' |translate}}</th>
+          <th scope="col">{{'common.price' |translate}}</th>
+          <th scope="col">{{'common.numberOfSeats' |translate}}</th>
+          <th scope="col">{{'common.comment' |translate}}</th>
+          <th></th>
+        </tr>
+        </thead>
+          <tbody>
+          <tr *ngFor="let transport of takenTransports.results" [class.pending-transport-request-border]="!transport.acceptedByDriver" [class.accepted-transport-request-border]="transport.acceptedByDriver">
+            <td [attr.data-label]="ts.instant('common.start')">
+              <app-display-location [location]="transport.startLocation"></app-display-location>
+            </td>
+            <td [attr.data-label]="ts.instant('common.end')">
+              <app-display-location [location]="transport.endLocation"></app-display-location>
+            </td>
+            <td [attr.data-label]="ts.instant('common.date')">{{transport.date}}</td>
+            <td [attr.data-label]="ts.instant('common.time')">{{transport.time}}</td>
+            <td [attr.data-label]="ts.instant('common.price')">{{transport.price}}</td>
+            <td [attr.data-label]="ts.instant('common.numberOfSeats')">{{transport.numberOfSeats}}</td>
+            <td [attr.data-label]="ts.instant('common.comment')">
+              <mat-icon *ngIf="transport.comment; else noCommentTemplate" matTooltip="{{transport.comment}}">done</mat-icon>
+              <ng-template #noCommentTemplate><mat-icon>highlight_off</mat-icon></ng-template>
+            </td>
+            <th><button mdbBtn style="background-color: white" type="button" color="secondary" outline="true" mdbWavesEffect [routerLink]="'/reviews/'+transport.transport.driver.id">{{'common.reviewDriver' | translate}}</button></th>
+          </tr>
+          </tbody>
+      </table>
+      </app-responsive-table-with-collapsed-rows-two-side>
+
+      <div class="container-fluid pt-1">
+        <div class="row">
+          <app-color-legend>
+            <li><span class="pending-transport-request-background"></span>{{'myTransports.pendingDriverApproval' |translate}}</li>
+            <li><span class="accepted-transport-request-background"></span>{{'myTransports.accepted' |translate}}</li>
+          </app-color-legend>
+        </div>
+        <div class="row float-right">
+          <mat-paginator [length]="takenTransports.count"
+                         [pageSize]="5"
+                         [pageIndex]="takenTransports.currentPage -1"
+                         [hidePageSize]="true"
+                         (page)=" changeTakenTransportPage($event.pageIndex +1)">
+          </mat-paginator>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div *ngIf="takenTransports?.results.length === 0">
+      {{'myTransports.noTakenTransports' | translate}} <a [routerLink]="'/search'" >{{'myTransports.here' | translate}}</a>.
+    </div>
+
+  </mat-expansion-panel>
+
+</mat-accordion>

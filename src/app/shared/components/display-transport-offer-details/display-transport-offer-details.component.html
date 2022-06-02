@@ -1,0 +1,129 @@
+<div class="container">
+
+  <div class="row" *ngIf="displayDriver">
+    <div class="col-sm">
+
+      <div class="container">
+        <dl class="row">
+          <dt class="col-sm-3">
+            {{'common.driver' | translate}}:
+          </dt>
+          <dd class="col-sm-9">
+            {{transport.driver.username}}
+          </dd>
+
+        </dl>
+      </div>
+
+    </div>
+    <div class="col-sm">
+
+      <div class="container">
+        <dl class="row">
+          <dt class="col-sm-3">
+            {{'offerDetails.driverReviews' | translate}}:
+          </dt>
+          <dd class="col-sm-9">
+            <star-rating [value]="transport.driverAvgRating" totalstars="5" checkedcolor="gold" uncheckedcolor="black" size="24px" readonly="true"></star-rating>
+            <br />
+            <a [routerLink]="'/reviews/'+transport.driver.id">{{transport.driverNumberOfRatings}} {{'common.ratings' | translate}}</a>
+
+          </dd>
+
+        </dl>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm">
+
+      <div class="container">
+        <dl class="row">
+          <dt class="col-sm-3">
+            {{'common.date' | translate}}:
+          </dt>
+          <dd class="col-sm-9">
+            {{transport.date}}
+          </dd>
+          <dt class="col-sm-3">
+            {{'common.time' | translate}}:
+          </dt>
+          <dd class="col-sm-9">
+            {{transport.time}}
+          </dd>
+        </dl>
+      </div>
+
+    </div>
+    <div class="col-sm">
+
+      <div class="container">
+        <dl class="row">
+          <dt class="col-sm-3">
+            {{'common.price' | translate}}:
+          </dt>
+          <dd class="col-sm-9">
+            {{transport.price}}
+          </dd>
+          <dt class="col-sm-3">
+            {{'offerDetails.seatsAvailable' | translate}}:
+          </dt>
+          <dd class="col-sm-9">
+            {{transport.stillAvailableSeats}}
+          </dd>
+
+
+
+        </dl>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm">
+      <div class="container">
+        <div class="row">
+          <dt class="col-sm-3">
+            {{'offerDetails.start' | translate}}:
+          </dt>
+          <dd class="col-sm-9">
+            <app-display-location [location]="transport.startLocation"></app-display-location>
+          </dd>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="container">
+        <div class="row">
+          <dt class="col-sm-3">
+            {{'offerDetails.end' | translate}}:
+          </dt>
+          <dd class="col-sm-9">
+            <app-display-location [location]="transport.endLocation"></app-display-location>
+          </dd>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm">
+      <div class="container">
+        <div class="row">
+          <dt class="col-sm-3">
+            {{'common.additionalComments' | translate}}:
+          </dt>
+          <dd class="col-sm-9">
+            {{transport.comment}}
+          </dd>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+

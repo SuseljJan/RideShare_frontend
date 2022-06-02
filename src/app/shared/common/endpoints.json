@@ -1,0 +1,17 @@
+{
+  "djangoBackend": {
+    "transport": {
+      "getAll": "/django/transport/"
+    },
+    "auth": {
+      "login": "/django/auth/login/",
+      "register": "/django/auth/register/"
+    },
+    "campaign": {
+
+    },
+    "user": {
+      "withReviews": ""
+    }
+  }
+}

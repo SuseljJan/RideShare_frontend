@@ -1,0 +1,45 @@
+.dot {
+  height: 15px;
+  width: 15px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.sec{
+  position: relative;
+  right: -13px;
+  top:-22px;
+}
+
+
+.counter.counter-lg {
+  top: -24px !important;
+}
+
+
+.read-message {
+  background-color: #fafafa;
+}
+
+.unread-message {
+  background-color: white;
+}
+
+
+
+.read-message-background {
+  background-color: #b0b0b0;
+}
+.unread-message-background {
+  background-color: #e30000;
+}
+
+
+.read-message-border {
+  border-bottom: 2px solid #b0b0b0;
+}
+.unread-message-border {
+  border-bottom: 2px solid #e30000;
+}
+

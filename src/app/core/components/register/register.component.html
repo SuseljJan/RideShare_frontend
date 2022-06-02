@@ -1,0 +1,49 @@
+<div class="shadow p-3 mb-5 bg-white rounded ml-5 mt-5 mr-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <form (ngSubmit)="register()">
+          <h1>{{'register.registration'|translate}}</h1>
+          <br/>
+          <br/>
+
+          <mat-form-field>
+            <input matInput id="username" name="username" placeholder="{{'register.username'|translate}}" [(ngModel)]="user.username">
+          </mat-form-field>
+          <br/>
+          <mat-form-field>
+            <input matInput id="email" name="email" placeholder="{{'register.email'|translate}}" [(ngModel)]="user.email">
+          </mat-form-field>
+          <br/>
+          <mat-form-field>
+            <input matInput type="password" id="password" name="password" placeholder="{{'register.password'|translate}}" [(ngModel)]="user.password1">
+          </mat-form-field>
+          <br/>
+          <mat-form-field>
+            <input matInput type="password" id="repeatPassword" name="repeatPassword" placeholder="{{'register.repeatPassword'|translate}}" [(ngModel)]="user.password2">
+          </mat-form-field>
+
+          <br/>
+          <br/>
+          <app-submit-btn [value]="'Register'"></app-submit-btn>
+
+          <br/>
+          <br/>
+          <br/>
+          <br />
+          <a [routerLink]="'/login'">{{'register.allreadyHaveAccount'|translate}}</a>
+
+        </form>
+      </div>
+      <div class="col-sm log-image">
+        <img src="../../../../assets/images/vintage-car.jpg"  alt="car image" style="padding-top: 100px; padding-left: 20px"/>
+
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+

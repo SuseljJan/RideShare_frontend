@@ -1,0 +1,102 @@
+<mat-accordion multi="true">
+
+  <mat-expansion-panel  [expanded]="true">
+    <mat-expansion-panel-header>
+      <h2>{{'locationsCombo.location' |translate}}</h2>
+    </mat-expansion-panel-header>
+
+    <!-- meant for creating transport offer -->
+    <mat-expansion-panel  [expanded]="false" *ngIf="displayNegotiability">
+      <mat-expansion-panel-header>
+        <h2>{{'locationsCombo.negotiability' |translate}}</h2>
+      </mat-expansion-panel-header>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm text-center">
+            <mat-checkbox [(ngModel)]="startLocationIsNegotiable">{{'locationsCombo.startIsNegotiable' |translate}}</mat-checkbox>
+          </div>
+          <div class="col-sm text-center">
+            <mat-checkbox [(ngModel)]="endLocationIsNegotiable">{{'locationsCombo.endIsNegotiable' |translate}}</mat-checkbox>
+          </div>
+        </div>
+      </div>
+
+    </mat-expansion-panel>
+    <!-- end -->
+
+
+
+    <mat-expansion-panel  [expanded]="true" *authOnly>
+      <mat-expansion-panel-header>
+        <h2>{{'locationsCombo.pickFromOftenUsed' |translate}}</h2>
+      </mat-expansion-panel-header>
+
+
+      <div class="container" *ngIf="oftenUsedLocations != null && oftenUsedLocations != undefined && oftenUsedLocations?.length != 0">
+        <div class="row">
+          <div class="col-sm text-center">
+            <mat-form-field>
+              <mat-label>START</mat-label>
+              <mat-select [disabled]="!startLocationIsNegotiable && !enableAllControls" [(value)]="oftenUsedStartLocationId" #oftenUsedStartLocationPicker (selectionChange)="selectOftenUsedStartLocation(mapPicker, startLocationForm, oftenUsedStartLocationPicker.selected.value)">
+                <mat-option *ngFor="let location of oftenUsedLocations" [value]="location.id">
+                  {{location.name}}
+                </mat-option>
+              </mat-select>
+
+              <mat-hint (click)="clearOftenUsedStartLocation(mapPicker)" style="cursor: pointer;">clear</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col-sm text-center">
+            <mat-form-field>
+              <mat-label>END</mat-label>
+              <mat-select [disabled]="!endLocationIsNegotiable && !enableAllControls" [(value)]="oftenUsedEndLocationId" #oftenUsedEndLocationPicker (selectionChange)="selectOftenUsedEndLocation(mapPicker, endLocationForm ,oftenUsedEndLocationPicker.selected.value)">
+                <mat-option *ngFor="let location of oftenUsedLocations" [value]="location.id">
+                  {{location.name}}
+                </mat-option>
+              </mat-select>
+
+              <mat-hint (click)="clearOftenUsedEndLocation(mapPicker)" style="cursor: pointer;">clear</mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="oftenUsedLocations?.length == 0">
+        <p>
+          {{'locationsCombo.youDontHaveAnyLocations' |translate}} <a [routerLink]="'/me/locations'">{{'locationsCombo.here' |translate}}</a>
+        </p>
+      </div>
+
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel  [expanded]="true">
+      <mat-expansion-panel-header>
+        <h2>{{'locationsCombo.pickOnMap' |translate}}</h2>
+      </mat-expansion-panel-header>
+      <app-leaflet-location-picker [startLocationPickerIsEnabled]="startLocationPickerIsEnabled" [endLocationPickerIsEnabled]="endLocationPickerIsEnabled"
+                                   [startLocationToPreload]="startLocationToPreload" [endLocationToPreload]="endLocationToPreload"
+                                   #mapPicker (locationSetOrChange)="locationChangedOnMap($event, startLocationForm, endLocationForm)">
+      </app-leaflet-location-picker>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [(expanded)]="enterManuallyExpanded" (expandedChange)="manualLocationsInputExpandedChange($event)">
+      <mat-expansion-panel-header>
+        <h2>{{'locationsCombo.enterManually' |translate}}</h2> <mat-icon mdbTooltip="{{'locationsCombo.youCanEnterDestination' |translate}}">help_outline</mat-icon>
+      </mat-expansion-panel-header>
+      <div class="container">
+        <div class="row pb-4">
+          <div class="col-sm">
+            <app-display-locations-form [enteringLocationsIsEnabled]="startLocationPickerIsEnabled" #startLocationForm [title]="translate.transform('locationsCombo.start')" [(location)]="startLocation" [(valuesChanged)]="manualStartInputFormChanged"> </app-display-locations-form>
+          </div>
+          <div class="col-sm">
+            <app-display-locations-form [enteringLocationsIsEnabled]="endLocationPickerIsEnabled" #endLocationForm [title]="translate.transform('locationsCombo.end')" [(location)]="endLocation" [(valuesChanged)]="manualEndInputFormChanged"></app-display-locations-form>
+          </div>
+        </div>
+
+      </div>
+    </mat-expansion-panel>
+
+  </mat-expansion-panel>
+</mat-accordion>

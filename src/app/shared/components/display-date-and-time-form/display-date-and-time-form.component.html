@@ -1,0 +1,38 @@
+<form #dateAndTimeForm="ngForm">
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <label for="date">{{title}}</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+          <mat-form-field  [floatLabel]="floatLabel">
+            <input matInput id="date" name="date" [matDatepicker]="picker"  placeholder="{{'common.date'|translate}}" [(ngModel)]="date" [disabled]="!dateIsEnabled" readonly (click)="picker.open()" required #dateControl="ngModel">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-checkbox class="pl-4" [(ngModel)]="dateIsNegotiable" name="dateIsNegotiable" *ngIf="displayNegotiability">{{'common.negotiable' | translate}}</mat-checkbox>
+          <show-errors [control]="dateControl"></show-errors>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+          <mat-form-field  [floatLabel]="floatLabel">
+            <input [ngxTimepicker]="pickerTime" matInput placeholder="{{'common.time'|translate}}" [format]="24" readonly name="time" [disabled]="!timeIsEnabled" [(ngModel)]="time" required #timeControl="ngModel">
+            <ngx-material-timepicker-toggle matSuffix [for]="pickerTime">
+              <mat-icon ngxMaterialTimepickerToggleIcon style="font-size: 15px">access_time</mat-icon>
+            </ngx-material-timepicker-toggle>
+            <ngx-material-timepicker #pickerTime></ngx-material-timepicker>
+          </mat-form-field>
+          <mat-checkbox class="pl-4" [(ngModel)]="timeIsNegotiable" name="timeIsNegotiable" *ngIf="displayNegotiability">{{'common.negotiable' | translate}}</mat-checkbox>
+          <show-errors [control]="timeControl"></show-errors>
+        </div>
+      </div>
+  </div>
+
+
+</form>
+

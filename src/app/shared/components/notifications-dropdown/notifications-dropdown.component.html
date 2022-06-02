@@ -1,0 +1,29 @@
+<div style="z-index: 1000; position: relative; overflow: visible; background: rgba(230, 6, 6, .5);">
+
+  <div class="notifications" [class.shown-notif-dropdown]="notificationsShown" [class.hidden-notif-dropdown]="!notificationsShown" id="box">
+    <div style="font-weight: bold; border-bottom: 1px solid #eee; padding: 10px"> {{'notifications.notifications' |translate}} - <span>{{notificationsCount}}</span> <a href="javascript:void(0);" style="float:right; padding-right: 10px; font-weight: normal;" (click)="dismissAll()">{{'notifications.dismissAll' |translate}}</a> </div>
+
+    <div *ngIf="notifications && notifications.length > 0; else noNotifications">
+      <div class="notifications-item" *ngFor="let message of notifications">
+        <div class="text">
+          <h4 class="title-display" style="font-weight: bold; font-size: 120%">{{message.title}}</h4>
+          <div class="date-display">{{message.created | date: 'MMM d, y, h:mm:ss a'}}</div>
+          <p class="message-display" style="color: rgba(0,0,0,1); font-size: 90%" [innerHTML]="message.message"></p>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noNotifications>
+      <div class="notifications-item">
+        <div class="text">
+          <p>{{'notifications.noNew' |translate}}</p>
+        </div>
+      </div>
+    </ng-template>
+
+    <div>
+      <a [routerLink]="'/me/messages'" style="padding: 20px">{{'notifications.viewAll' |translate}}</a>
+    </div>
+  </div>
+
+</div>

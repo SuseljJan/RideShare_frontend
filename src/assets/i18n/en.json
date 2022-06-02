@@ -1,0 +1,222 @@
+{
+  "home": {
+    "whatIs": "What is",
+    "appName": "Ride Shares",
+    "howToUse": "How to use",
+    "whatsNew": "what's new",
+    "shareTransportationTheSmartWay": "Share transports the smart way"
+  },
+  "nav": {
+    "searchTransports": "Search transports",
+    "createTransportOffer": "Create transport",
+    "myTransports": "my transports",
+    "myCampaigns": "My campaigns",
+    "myLocations": "My locations",
+    "help": "Help",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register"
+  },
+  "searchTransports": {
+    "driver": "Driver",
+    "searchTransportOffers": "Search transport offers",
+    "when": "When",
+    "location": "Location",
+    "bookASeat": "Book a seat",
+    "enterSearchQuery": "Enter search query",
+    "noResults": "No results for given search query"
+  },
+  "locationsCombo": {
+    "pickFromOftenUsed": "Pick from often used locations",
+    "pickOnMap": "Pick on map",
+    "removeMarker": "Remove marker",
+    "youCanEnterDestination": "You can enter destinations in this panel or select them on the map panel",
+    "youDontHaveAnyLocations": "You don't have any often used locations to pick from. Create a new often used location",
+    "here": "here",
+    "startIsNegotiable": "Start locations is negotiable",
+    "endIsNegotiable": "End location in negotiable",
+    "negotiability": "Negotiability",
+    "location": "Location",
+    "enterManually": "Enter manually",
+    "start": "Start",
+    "end": "End"
+  },
+
+  "transportRequest": {
+    "sendTransportRequest": "Send transport request",
+    "transportOffer": "Transport offer",
+    "myOffer": "My offer",
+    "offer": "Offer",
+    "keepTheSameLocations": "Keep the same locations",
+    "keepTheSameDetails": "Keep the same details",
+    "useCampaign": "Use campaign",
+    "additionalComments": "Additional comments",
+    "campaign": "Campaign",
+    "addUnderCampaign": "Add under campaign",
+    "youDontHaveAnyCampaigns": "You don't have any active campaigns. Create a new/first one?",
+    "createCampaign": "Create campaign",
+    "whatAreCampaigns": "What are campaigns?",
+    "createNewCampaign": "Create new campaign?",
+    "details": "Details",
+    "dateAndTime": "Date and time",
+    "pricingAndSeats":  "Pricing and seats"
+  },
+
+  "createTransport": {
+    "createTransportOffer": "Create transport",
+    "dateAndTime": "Date and time",
+    "pricingAndSeats": "Pricing and seats",
+    "additionalComments": "Additional comments",
+    "createTransport": "Create transport",
+    "yourOffer": "Your offer"
+  },
+  "myTransports": {
+    "givenTransports": "Given transports",
+    "takenTransports": "Taken transports",
+    "activeInSearch": "Active in search",
+    "inactiveInSearch": "Inactive in search",
+    "canceled": "Canceled",
+    "requests": "Requests",
+    "cancel": "Cancel",
+    "noGivenTransports": "No given transports yet. Create your first transport ",
+    "here": "here",
+    "pendingDriverApproval": "Pending driver's approval",
+    "accepted": "Accepted",
+    "noTakenTransports": "No taken transports yet. Book a your first transport "
+  },
+  "myLocations": {
+    "existingLocations": "Existing locations",
+    "name": "Name",
+    "location": "Location",
+    "remove": "Remove",
+    "createLocation": "Create location",
+    "nameIdentifier": "Name (identifier)",
+    "details": "Details",
+    "map": "Map",
+    "youCanEnterDestinationsInThisPanel": "You can enter destinations in this panel or select them on the map panel"
+  },
+
+  "myCampaigns": {
+    "existingCampaigns": "Existing campaigns",
+    "name": "Name",
+    "closed": "Closed",
+    "allRequests": "All requests",
+    "createCampaign": "Create a campaign",
+    "whatAreCampaigns": "What are campaigns"
+  },
+
+  "common": {
+    "negotiable": "Negotiable",
+    "clickToFindOutMore": "Click to find out more",
+    "reviewDriver": "Review driver",
+    "price": "Price",
+    "numberOfSeats": "Number of seats",
+    "search": "Search",
+    "date": "Date",
+    "fullDay": "Full day",
+    "fromTime": "From (time)",
+    "toTime": "To (time)",
+    "start": "Start location",
+    "end": "End location",
+    "clear": "clear",
+    "removeStart": "Remove START",
+    "removeEnd": "Remove END",
+    "results": "Results",
+    "time": "Time",
+    "requestedPrice": "Requested price",
+    "availableSeats": "Available seats",
+    "ratings": "Rating/s",
+    "comment": "Comment",
+    "additionalComments": "Additional comments",
+    "driver": "Driver"
+  },
+
+  "notifications": {
+    "notifications": "Notifications",
+    "dismissAll": "DISMISS ALL",
+    "viewAll": "All notifications",
+    "noNew": "No new notifications"
+  },
+  "alertMessages": {
+    "messages": "Messages",
+    "unread": "Unread",
+    "Read": "Read"
+  },
+  "myProfile": {
+    "myProfile": "My profile",
+    "profileDetails": "Profile details",
+    "username": "Username",
+    "email": "Email",
+    "myReviews": "My reviews",
+    "youDont":"You don't have any reviews yet."
+  },
+  "reviews": {
+    "rating": "Rating",
+    "reviewer": "Reviewer",
+    "comment": "Comment",
+    "user": "User",
+    "averageRating": "Average rating",
+    "numberOfReviews": "Number of reviews",
+    "reviews": "Reviews",
+    "latestReviews": "Latest reviews",
+    "userDoesntHaveReviews": "User doesn't have any reviews yet.",
+    "createReview": "Create review",
+    "writeYourComment": "Write your comment...",
+    "youMustBeLoggedIn": "You must be logged in to create a review."
+  },
+  "campaigns": {
+    "closed": "Closed",
+    "campaigns": "Campaigns",
+    "existingCampaigns": "Existing campaigns",
+    "createCampaign": "Create campaign",
+    "true": "true",
+    "false": "false",
+    "allRequests": "All requests",
+    "name": "Name",
+    "whatAreCampaigns": "What are campaigns?",
+    "youDontHaveAnyCampaigns": "You don't have any campaigns yet. Create the first one?"
+  },
+  "locations": {
+    "myLocations": "My locations",
+    "existingLocations": "Existing locations",
+    "name": "Name",
+    "location": "Location",
+    "noLocations": "No often used locations yet. Add your first one?",
+    "createLocation": "Create location",
+    "details": "Details",
+    "map": "Map",
+    "remove": "Remove"
+  },
+  "offerDetails": {
+    "start": "Start",
+    "end": "End",
+    "seatsAvailable": "Seats available",
+    "driverReviews": "Driver's reviews"
+  },
+  "myTransportRequests": {
+    "transportRequests": "Transport requests",
+    "offer": "Offer",
+    "availableRequests": "Available requests",
+    "noAvailableRequests": "No available requests",
+    "acceptedRequests": "Accepted requests",
+    "noAcceptedRequests": "No accepted requests",
+    "acceptOffer": "Accept offer"
+
+  },
+  "login": {
+    "login": "Login",
+    "username": "Username",
+    "password": "Password",
+    "dontHaveAccount" : "Don't have an account yet?"
+  },
+  "register": {
+    "registration": "Registration",
+    "username": "Username",
+    "password": "Password",
+    "email": "Email",
+    "repeatPassword": "Repeat password",
+    "register": "Register",
+    "allreadyHaveAccount": "Already have an account?"
+  }
+
+}

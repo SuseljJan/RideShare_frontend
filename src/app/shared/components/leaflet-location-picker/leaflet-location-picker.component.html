@@ -1,0 +1,22 @@
+<div class="map"
+     leaflet
+     (leafletMapReady)="onMapReady($event)"
+     [leafletOptions]="options"
+     [leafletCenter]=""
+     ></div>
+
+<div class="row pt-2">
+
+  <div class="col-sm" *ngIf="numberOfMarkers == 2">
+    <span [class.disabled-text]="!toggleForStartIsEnabled" class="pr-1">START</span>
+    <mat-slide-toggle #locationsToggle [disabled]="!toggleForStartIsEnabled || !toggleForEndIsEnabled" [checked]="toggleLocationIsEnd"></mat-slide-toggle>
+    <span [class.disabled-text]="!toggleForEndIsEnabled" class="pl-1">END</span>
+  </div>
+
+  <div class="col-sm">
+    <button type="button" (click)="removeEndLocation()" class="btn btn-outline-danger float-right ml-2" [hidden]="numberOfMarkers !== 2" *ngIf="endLocationPickerIsEnabled">Remove END</button>
+    <button type="button" (click)="removeStartLocation()" class="btn btn-outline-success float-right" [hidden]="numberOfMarkers !== 2" *ngIf="startLocationPickerIsEnabled">Remove START</button>
+    <button type="button" (click)="removeMarker()" class="btn btn-outline-success float-right" [hidden]="numberOfMarkers !== 1">Remove marker</button>
+  </div>
+</div>
+

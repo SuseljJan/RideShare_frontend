@@ -1,0 +1,170 @@
+<!--todo: create default time to full day (create a checkbox)-->
+<h1>{{ 'searchTransports.searchTransportOffers' | translate}}</h1>
+
+<mat-accordion multi="true">
+  <form  #searchTransportForm="ngForm" (ngSubmit)="search(searchTransportForm.valid,
+                                                          locationsCombo.startLocationIsSelected(),
+                                                          locationsCombo.endLocationIsSelected(),
+                                                          locationsCombo.manualStartInputFormChanged,
+                                                          locationsCombo.manualEndInputFormChanged,
+                                                          locationsCombo); searchTransportForm.form.markAsTouched();">
+  <mat-expansion-panel [(expanded)]="searchExpanded">
+    <mat-expansion-panel-header>
+      <h2>{{ 'common.search' | translate}}</h2>
+    </mat-expansion-panel-header>
+
+    <mat-accordion multi="true">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <h2>{{ 'searchTransports.when' | translate}}</h2>
+        </mat-expansion-panel-header>
+
+        <div class="container">
+          <div class="row">
+          <div class="row">
+            <div class="col-sm  my-auto">
+              <mat-form-field class="medium-input" [floatLabel]="'always'">
+                <input matInput id="date" [matDatepicker]="picker" required  placeholder="{{ 'common.date' | translate}}" [(ngModel)]="transportToSearch.date" #dateControl="ngModel" name="date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <show-errors [control]="dateControl"></show-errors>
+
+            </div>
+
+            <div class="col-sm  my-auto">
+              <mat-checkbox class="pl-4" [(ngModel)]="transportToSearch.fullDay" name="displayFullDayResults">{{ 'common.fullDay' | translate}}</mat-checkbox>
+            </div>
+
+            <div class="col-sm">
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <mat-form-field  [floatLabel]="'always'">
+                      <input [ngxTimepicker]="pickerTimeFrom" required matInput placeholder="From (time)" [format]="24" readonly [(ngModel)]="transportToSearch.timeFrom" #timeFromControl="ngModel" name="timeFrom" [disabled]="transportToSearch.fullDay">
+                      <ngx-material-timepicker-toggle matSuffix [for]="pickerTimeFrom">
+                        <mat-icon ngxMaterialTimepickerToggleIcon style="font-size: 15px">access_time</mat-icon>
+                      </ngx-material-timepicker-toggle>
+                      <ngx-material-timepicker #pickerTimeFrom ></ngx-material-timepicker>
+                    </mat-form-field>
+                    <show-errors [control]="timeFromControl"></show-errors>
+                  </div>
+                  <div class="col">
+                    <mat-form-field  [floatLabel]="'always'">
+                      <input [ngxTimepicker]="pickerTimeTo" required matInput placeholder="To (time)" [format]="24" readonly [(ngModel)]="transportToSearch.timeTo" #timeToControl="ngModel" name="timeTo" [disabled]="transportToSearch.fullDay">
+                      <ngx-material-timepicker-toggle matSuffix [for]="pickerTimeTo">
+                        <mat-icon ngxMaterialTimepickerToggleIcon style="font-size: 15px">access_time</mat-icon>
+                      </ngx-material-timepicker-toggle>
+                      <ngx-material-timepicker #pickerTimeTo ></ngx-material-timepicker>
+                    </mat-form-field>
+                    <show-errors [control]="timeToControl"></show-errors>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+</div>
+
+      </mat-expansion-panel>
+
+      <app-locations-often-used-map-manual-combo #locationsCombo [(endLocation)]="transportToSearch.endLocation" [(startLocation)]="transportToSearch.startLocation"
+                                                 [(oftenUsedEndLocationId)]="transportToSearch.endLocationId" [(oftenUsedStartLocationId)]="transportToSearch.startLocationId"
+      ></app-locations-often-used-map-manual-combo>
+
+
+
+
+
+      <div class="container-fluid pt-3">
+        <div class="row">
+          <div class="col text-right">
+            <button mdbBtn type="submit" color="secondary" mdbWavesEffect >{{ 'common.search' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </mat-accordion>
+
+
+
+
+
+
+  </mat-expansion-panel>
+  </form>
+
+  <mat-expansion-panel [(expanded)]="resultsExpanded">
+    <mat-expansion-panel-header>
+      <h2>{{ 'common.results' | translate}} ({{searchResults?.count || 0}})</h2>
+    </mat-expansion-panel-header>
+
+
+
+    <div *ngIf="searchResults?.results?.length > 0">
+      <table>
+        <thead>
+        <tr>
+          <th scope="col">{{ 'searchTransports.driver' | translate}}</th>
+          <th scope="col">{{ 'common.start' | translate}}</th>
+          <th scope="col">{{ 'common.end' | translate}}</th>
+          <th scope="col">{{ 'common.date' | translate}}</th>
+          <th scope="col">{{ 'common.time' | translate}}</th>
+          <th scope="col">{{ 'common.requestedPrice' | translate}}</th>
+          <th scope="col">{{ 'common.availableSeats' | translate}}</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let result of searchResults.results">
+          <td [attr.data-label]="ts.instant('searchTransports.driver')">
+            <div class="pb-1">{{result.driver.username}}</div>
+            <div>
+            <star-rating [value]="result.driverAvgRating" totalstars="5" checkedcolor="gold" uncheckedcolor="black" size="24px" readonly="true"></star-rating>
+            <a [routerLink]="'/reviews/'+result.driver.id">{{result.driverNumberOfRatings}} {{'common.ratings' | translate}}</a>
+            </div>
+          </td>
+          <td [attr.data-label]="ts.instant('common.start')">
+            <app-display-location [location]="result.startLocation"></app-display-location>
+          </td>
+          <td [attr.data-label]="ts.instant('common.end')">
+            <app-display-location [location]="result.endLocation"></app-display-location>
+          </td>
+          <td [attr.data-label]="ts.instant('common.date')">{{result.date | date}}</td>
+          <td [attr.data-label]="ts.instant('common.time')" >{{convertTimeStringToDate(result.time.toString()) | date: 'HH:mm'}}</td>
+          <td [attr.data-label]="ts.instant('common.requestedPrice')">{{result.price}} €</td>
+          <td [attr.data-label]="ts.instant('common.availableSeats')" >{{result.stillAvailableSeats}}</td>
+          <th><a mdbBtn type="button" color="secondary" outline="true" mdbWavesEffect [routerLink]="'/transports/'+result.id+'/send_request'">{{'searchTransports.bookASeat' | translate}}</a></th>
+        </tr>
+        </tbody>
+      </table>
+      <mat-paginator [length]="searchResults.count"
+                     [pageSize]="5"
+                     [pageIndex]="searchResults.currentPage -1"
+                     [hidePageSize]="true"
+                     (page)="changeResultsPage($event.pageIndex +1)">
+      </mat-paginator>
+
+
+    </div>
+
+    <div *ngIf="!searchResults">
+      {{'searchTransports.enterSearchQuery' | translate}}.  <mat-icon mdbTooltip="In order to find transports enter a search query. Click here to find out more." [routerLink]="'/help'">help_outline</mat-icon>
+    </div>
+
+    <div *ngIf="searchResults?.results.length === 0">
+      {{'searchTransports.noResults' | translate}}
+      .
+    </div>
+
+  </mat-expansion-panel>
+
+
+
+
+</mat-accordion>
+
+
+

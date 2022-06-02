@@ -1,0 +1,119 @@
+<h1>{{'myTransportRequests.transportRequests'|translate}}</h1>
+
+<mat-accordion multi="true">
+
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <h2>{{'myTransportRequests.offer'|translate}}</h2>
+    </mat-expansion-panel-header>
+
+   <app-display-transport-offer-details [transport]="transport" [displayDriver]="false" *ngIf="transport"></app-display-transport-offer-details>
+
+  </mat-expansion-panel>
+
+
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <h2>{{'myTransportRequests.availableRequests'|translate}}</h2>
+      ({{passengersOffers?.count}})
+    </mat-expansion-panel-header>
+
+    <div *ngIf="passengersOffers?.results?.length > 0">
+      <table>
+        <thead>
+        <tr>
+          <th scope="col">{{'common.start'|translate}}</th>
+          <th scope="col">{{'common.end'|translate}} location</th>
+          <th scope="col">{{'common.date'|translate}}</th>
+          <th scope="col">{{'common.time'|translate}}</th>
+          <th scope="col">{{'common.requestedPrice'|translate}}</th>
+          <th scope="col">{{'common.numberOfSeats'|translate}}</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let offer of passengersOffers.results">
+          <td [attr.data-label]="ts.instant('common.start')">
+            <app-display-location [location]="offer.startLocation"></app-display-location>
+          </td>
+          <td [attr.data-label]="ts.instant('common.end')">
+            <app-display-location [location]="offer.endLocation"></app-display-location>
+          </td>
+          <td [attr.data-label]="ts.instant('common.date')">{{offer.date}}</td>
+          <td [attr.data-label]="ts.instant('common.time')">{{offer.time}}</td>
+          <td [attr.data-label]="ts.instant('common.requestedPrice')">{{offer.price}}</td>
+          <td [attr.data-label]="ts.instant('common.numberOfSeats')">{{offer.numberOfSeats}}</td>
+          <th><button mdbBtn type="button" color="secondary" outline="true" mdbWavesEffect (click)="acceptOffer(offer.id)">{{'myTransportRequests.acceptOffer'|translate}}</button></th>
+        </tr>
+        </tbody>
+      </table>
+      <mat-paginator [length]="passengersOffers.count"
+                     [pageSize]="5"
+                     [pageIndex]="passengersOffers.currentPage -1"
+                     [hidePageSize]="true"
+                     (page)="changeAvailableRequestsPage($event.pageIndex +1)">
+      </mat-paginator>
+
+
+    </div>
+    <div *ngIf="passengersOffers?.results.length === 0">
+      {{'myTransportRequests.noAvailableRequests'|translate}}
+    </div>
+
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <h2>{{'myTransportRequests.acceptedRequests'|translate}}</h2>
+      ({{acceptedPassengersOffers?.count}})
+    </mat-expansion-panel-header>
+
+    <div *ngIf="acceptedPassengersOffers?.results?.length > 0">
+      <table>
+        <thead>
+        <tr>
+          <th scope="col">{{'common.start'|translate}}</th>
+          <th scope="col">{{'common.end'|translate}}</th>
+          <th scope="col">{{'common.date'|translate}}</th>
+          <th scope="col">{{'common.time'|translate}}</th>
+          <th scope="col">{{'common.requestedPrice'|translate}}</th>
+          <th scope="col">{{'common.numberOfSeats'|translate}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let transport of acceptedPassengersOffers.results">
+          <td [attr.data-label]="ts.instant('common.start')">
+            <app-display-location [location]="transport.startLocation"></app-display-location>
+          </td>
+          <td [attr.data-label]="ts.instant('common.end')">
+            <app-display-location [location]="transport.endLocation"></app-display-location>
+          </td>
+          <td [attr.data-label]="ts.instant('common.date')">{{transport.date}}</td>
+          <td [attr.data-label]="ts.instant('common.time')">{{transport.time}}</td>
+          <td [attr.data-label]="ts.instant('common.price')">{{transport.price}}</td>
+          <td [attr.data-label]="ts.instant('common.numberOfSeats')">{{transport.numberOfSeats}}</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <mat-paginator [length]="acceptedPassengersOffers.count"
+                     [pageSize]="5"
+                     [pageIndex]="acceptedPassengersOffers.currentPage -1"
+                     [hidePageSize]="true"
+                     (page)="changeAcceptedRequestsPage($event.pageIndex +1)">
+      </mat-paginator>
+
+    </div>
+
+    <div *ngIf="acceptedPassengersOffers?.results.length === 0">
+      {{'myTransportRequests.noAcceptedRequests'|translate}}
+    </div>
+
+  </mat-expansion-panel>
+
+</mat-accordion>
+
+
+
+
+

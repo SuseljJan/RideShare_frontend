@@ -1,0 +1,87 @@
+<h1>{{'campaigns.campaigns' |translate}}</h1>
+<br/>
+<mat-accordion multi="true">
+
+  <mat-expansion-panel [expanded]="campaignsExpanded">
+    <mat-expansion-panel-header>
+      <h2>{{'campaigns.existingCampaigns' |translate}}</h2>
+    </mat-expansion-panel-header>
+
+
+      <div *ngIf="campaigns?.results.length > 0">
+        <app-responsive-table-with-collapsed-rows-two-side>
+        <table>
+          <thead>
+          <tr>
+            <td scope="col">{{'campaigns.name' |translate}}</td>
+            <td scope="col">{{'campaigns.closed' |translate}}</td>
+            <td scope="col"></td>
+          </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let campaign of campaigns.results">
+              <td [attr.data-label]="ts.instant('campaigns.name')">{{campaign.name}}</td>
+              <td [attr.data-label]="ts.instant('campaigns.closed')">
+                <div *ngIf="campaign.transportWasFound">
+                  {{'campaigns.true' |translate}}
+                </div>
+                <div *ngIf="!campaign.transportWasFound">
+                  {{'campaigns.false' |translate}}
+                </div>
+
+
+              </td>
+              <td><a class="btn btn-outline-secondary waves-effect p-2" [routerLink]="'/me/campaigns/requests/'+campaign.id">{{'campaigns.allRequests' |translate}}</a></td>
+            </tr>
+          </tbody>
+        </table>
+        </app-responsive-table-with-collapsed-rows-two-side>
+
+        <mat-paginator [length]="campaigns.count"
+                       [pageSize]="5"
+                       [pageIndex]="campaigns.currentPage -1"
+                       [hidePageSize]="true"
+                       (page)=" changePage($event.pageIndex +1)">
+        </mat-paginator>
+      </div>
+
+
+
+
+
+
+    <div *ngIf="campaigns?.results.length === 0">
+      <p>{{'campaigns.youDontHaveAnyCampaigns' | translate}}</p>
+    </div>
+
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="createCampaignExpanded">
+    <mat-expansion-panel-header>
+      <h2>{{'campaigns.createCampaign' | translate}}</h2>
+    </mat-expansion-panel-header>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <form (ngSubmit)="createCampaign()">
+            <mat-form-field  style="width: 80%">
+              <input matInput id="name" name="name" placeholder="Name" maxlength="30" [(ngModel)]="newCampaign.name">
+            </mat-form-field>
+            <br />
+            <br />
+            <br />
+            <app-submit-btn [value]="translate.transform('campaigns.createCampaign')"></app-submit-btn>
+          </form>
+        </div>
+        <div class="col-sm text-center">
+          {{'campaigns.whatAreCampaigns' | translate}} <button mat-icon-button mdbTooltip="{{'common.clickToFindOutMore' | translate}}" [routerLink]="'/help/campaigns'"><mat-icon>help_outline</mat-icon></button>
+        </div>
+
+      </div>
+    </div>
+
+
+  </mat-expansion-panel>
+
+</mat-accordion>

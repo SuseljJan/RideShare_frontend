@@ -1,0 +1,91 @@
+:host /deep/ table {
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+:host /deep/ table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+:host /deep/ table tr {
+  border:0px;
+  border-bottom: 1px solid #ddd;
+
+  padding: .35em;
+}
+
+:host /deep/ table th,
+:host /deep/ table td {
+  padding: .625em;
+  text-align: center;
+}
+
+:host /deep/ table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+  :host /deep/ table {
+    border: 0;
+  }
+
+  :host /deep/ table caption {
+    font-size: 1.3em;
+  }
+
+  :host /deep/ table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  :host /deep/ table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+
+  :host /deep/ table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: left;
+  }
+
+  :host /deep/ table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content:  attr(data-label)"\A";
+    white-space: pre;
+    font-weight: bold;
+    text-transform: uppercase;
+
+  }
+
+  :host /deep/ table td:last-child {
+    border-bottom: 0;
+  }
+
+  :host /deep/ col.first{
+    width: 100%;
+  }
+  :host /deep/ col.notFirst{
+    width: 0%;
+  }
+
+}
+
+

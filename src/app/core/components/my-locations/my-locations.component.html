@@ -1,0 +1,89 @@
+<h1>      {{'locations.myLocations' | translate}}</h1>
+
+<mat-accordion multi="true">
+
+  <mat-expansion-panel [(expanded)]="existingLocationsExpand">
+    <mat-expansion-panel-header>
+      {{'locations.existingLocations' | translate}}
+      ({{locations?.count || 0}})
+    </mat-expansion-panel-header>
+
+    <div *ngIf="locations?.results?.length > 0">
+      <app-responsive-table-with-collapsed-rows-two-side>
+        <table>
+          <thead>
+          <tr>
+            <th scope="col">{{'locations.name' | translate}}</th>
+            <th scope="col">{{'locations.location' | translate}}</th>
+            <th scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let location of locations.results">
+            <td [attr.data-label]="ts.instant('myLocations.name')">{{location.name}}</td>
+            <td [attr.data-label]="ts.instant('myLocations.location')"><app-display-location [location]="location"></app-display-location></td>
+            <td><button class="btn btn-outline-danger" (click)="removeOftenUsedLocation(location.id)">{{'locations.remove' | translate}}</button></td>
+          </tr>
+          </tbody>
+        </table>
+      </app-responsive-table-with-collapsed-rows-two-side>
+      <mat-paginator [length]="locations.count"
+                     [pageSize]="5"
+                     [pageIndex]="locations.currentPage -1"
+                     [hidePageSize]="true"
+                     (page)="changePage($event.pageIndex +1)">
+      </mat-paginator>
+
+
+    </div>
+    <div *ngIf="locations?.results.length === 0">
+      {{'locations.noLocations' | translate}}
+    </div>
+
+  </mat-expansion-panel>
+
+  <form #createOftenUsedLocationForm="ngForm" (ngSubmit)="createOftenUsedLocation(createOftenUsedLocationForm.valid, locationEnteredManually, locationPicker)">
+  <mat-expansion-panel [(expanded)]="createLocationExpand">
+    <mat-expansion-panel-header>
+      {{'locations.createLocation' | translate}}
+    </mat-expansion-panel-header>
+
+    <mat-form-field style="width: 80%">
+      <input matInput id="name" name="name" placeholder="{{'myLocations.nameIdentifier' | translate}}" [(ngModel)]="locationToPost.name" required #nameControl="ngModel">
+    </mat-form-field>
+    <show-errors [control]="nameControl" *ngIf="nameControl.dirty"></show-errors>
+
+    <mat-accordion multi="true">
+      <mat-expansion-panel [expanded]="detailsExpanded">
+        <mat-expansion-panel-header>
+          {{'myLocations.details' | translate}} <mat-icon mdbTooltip="{{'myLocations.youCanEnterDestinationsInThisPanel' | translate}}">help_outline</mat-icon>
+        </mat-expansion-panel-header>
+
+        <app-display-locations-form [title]="''" [(location)]="locationToPost" [(valuesChanged)]="locationEnteredManually" #locationsForm></app-display-locations-form>
+
+
+
+      </mat-expansion-panel>
+
+
+      <mat-expansion-panel [expanded]="mapExpanded">
+        <mat-expansion-panel-header>
+          {{'myLocations.map' | translate}}
+        </mat-expansion-panel-header>
+        <app-leaflet-location-picker #locationPicker (locationSetOrChange)="setOrChangeLocation($event)" [numberOfMarkers]="1"></app-leaflet-location-picker>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <div class="container-fluid pt-3">
+      <div class="row text-right">
+        <div class="col-sm">
+          <input type="submit" value="{{'myLocations.createLocation' | translate}}" class="btn btn-info">
+        </div>
+      </div>
+    </div>
+
+  </mat-expansion-panel>
+
+
+  </form>
+</mat-accordion>

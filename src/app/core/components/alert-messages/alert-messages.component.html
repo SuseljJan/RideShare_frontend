@@ -1,0 +1,66 @@
+<h1>Messages</h1>
+
+<mat-accordion multi="true">
+
+  <mat-expansion-panel [expanded]="alertMessagesExtended" [hideToggle]="true" disabled="true">
+    <mat-expansion-panel-header>
+      <h2 style="color: black">Messages</h2>
+    </mat-expansion-panel-header>
+
+    <br>
+    <br>
+    <div *ngIf="alertMessages && alertMessages?.results.length > 0">
+      <div *ngFor="let message of alertMessages.results">
+
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div style="font-weight: bold; font-size: 130%">{{message.title}}</div>
+
+              <div style="color: rgba(0,0,0,0.5);">{{message.created | date: 'MMM d, y, h:mm:ss a'}}</div>
+
+              <p [innerHTML]="message.message" style="color: rgba(0,0,0,1); font-size: 90%"></p>
+              <br />
+
+              <hr [class.unread-message-background]="!message.read" [class.read-message-background]="message.read">
+            </div>
+
+
+          </div>
+
+
+        </div>
+      </div>
+
+
+      <div class="container-fluid pt-1">
+        <div class="row">
+          <app-color-legend>
+            <li><span class="unread-message-background"></span>Unread</li>
+            <li><span class="read-message-background"></span>Read</li>
+          </app-color-legend>
+        </div>
+
+
+        <div class="row float-right">
+    <mat-paginator [length]="alertMessages.count"
+                   [pageSize]="5"
+                   [pageIndex]="alertMessages.currentPage -1"
+                   [hidePageSize]="true"
+                   (page)=" changePage($event.pageIndex +1)">
+    </mat-paginator>
+
+        </div>
+      </div>
+
+    </div>
+    <div *ngIf="alertMessages?.results.length == 0">
+      <p>
+        You don't have any message yet
+      </p>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+
+
+
